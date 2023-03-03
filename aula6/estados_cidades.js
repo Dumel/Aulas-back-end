@@ -22494,9 +22494,11 @@ var estadosCidades = {
     ]
 };
 
-const listaEstadosJSON = {}
+
 
 const getListaDeEstados = function (){
+   const listaEstadosJSON = {}
+   const listaSigla = []
    
    let listaDesEstados = estadosCidades
 
