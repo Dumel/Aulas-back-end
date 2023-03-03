@@ -5,6 +5,11 @@
 * VERSÃo: 1.1
 */
 
+//toUpperCase - Converte uma String para maiusculo
+                //tolowerrCase - converte um string para minusculo
+
+var matematica = require('./modulo/calculadora.js')
+
 //Import da biblioteca para entrada de dados
 var readline = require('readline');
 
@@ -37,10 +42,22 @@ entradaDados.question('Valo1: \n', function(numero1){
 
             }else if(isNaN(valor1)  || isNaN(valor2)){
                 console.log('ERRO: Não é possivel calcular sem a entrada de valores numéricos')
+                entradaDados.close();
             
             }else{
-                //toUpperCase - Converte uma String para maiusculo
-                //tolowerrCase - converte um string para minusculo
+                
+                resultado = matematica.calcular(valor1, valor2, operacao);
+               
+               
+                //valida se o retorno da funçao é verdadeira ou falso(se for falso encerra o programa)
+                //if(resultado == false && typeof(resultado) == 'boolean')
+               
+                if(resultado === false)
+                    entradaDados.close();
+                else    
+                    console.log(resultado);
+
+
                 
             }
         });

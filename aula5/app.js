@@ -190,29 +190,30 @@ const listagemProdutos = function(){
         }
     })
 
-    // let cont = 0;
-    // let tantosProdutos = listProdutos.length
+    let cont = 0;
+    let tantosProdutos = listProdutos.length
 
-    // console.log('Produtos disponíveis')
-    // while (cont < tantosProdutos){
-    //     console.log(`Produtos: ${listProdutos[cont]}\n`)
-    //     cont+=1
-    // }
+    console.log('Produtos disponíveis')
+    while (cont < tantosProdutos){
+        console.log(`Produtos: ${listProdutos[cont]}\n`)
+        cont+=1
+    }
 
-    // console.log(listaProdutosJSON)
+    console.log(listaProdutosJSON)
 
-    // console.log('Nome:' + listaProdutosJSON.produtos[1].nome);
-    // console.log('\n Valor:' + listaProdutosJSON.produtos[1].valor);
-    // console.log('\n Cor:' + listaProdutosJSON.produtos[1].cores[1]);
+    console.log('Nome:' + listaProdutosJSON.produtos[1].nome);
+    console.log('\n Valor:' + listaProdutosJSON.produtos[1].valor);
+    console.log('\n Cor:' + listaProdutosJSON.produtos[1].cores[1]);
 
 
     
-    // listaProdutosJSON.produtos = listaProdutos;
-    // listaProdutosJSON.clientes = listaNomes;
+    listaProdutosJSON.produtos = listaProdutos;
+    listaProdutosJSON.clientes = listaNomes;
 
 
-    //console.log(listaProdutosJSON)
-    // console.log(listaProdutosJSON.clientes[1])
+    console.log(listaProdutosJSON)
+    console.log(listaProdutosJSON.clientes[1])
+    console.log(listProdutos)
 }
 
 listagemProdutos();
