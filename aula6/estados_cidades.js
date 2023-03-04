@@ -22498,18 +22498,100 @@ var estadosCidades = {
 
 const getListaDeEstados = function (){
    const listaEstadosJSON = {}
-   const listaSigla = []
+   const listaArray = []
    
-   let listaDesEstados = estadosCidades
-
-   listaEstadosJSON.uf  = listaDesEstados
-
-
-   console.log(listaEstadosJSON)
    
+   estadosCidades.estados.forEach(function(dados){
+
+      listaArray.push(dados.sigla)
+      listaEstadosJSON.uf = listaArray
+      listaEstadosJSON.quantidade = listaArray.length
+
+   })
+
+   return listaEstadosJSON
 }
 
 
 
-getListaDeEstados()
 
+/*
+// Primeira pensamento de lógica sem a filtragem de siglas
+const getDadosEstado = function (){
+   const listaJSON = {}
+   const dadosDescricao = estadosCidades.estados[0]
+
+
+
+   listaJSON.uf = dadosDescricao.sigla
+   listaJSON.descricao = dadosDescricao.nome
+   listaJSON.capital = dadosDescricao.capital
+   listaJSON.regiao = dadosDescricao.regiao
+
+   
+   return listaJSON
+
+   
+
+}
+*/
+
+const getDadosEstado = function (sigla){
+   const listaJSON = {}
+
+   estadosCidades.estados.forEach(function(dados){
+
+      if(sigla == dados.sigla ) {
+         listaJSON.uf = dados.sigla
+         listaJSON.descricao = dados.nome
+         listaJSON.capital = dados.capital
+         listaJSON.regiao = dados.regiao
+      }
+
+   })
+   return listaJSON
+}
+
+
+// console.log(getDadosEstado('RJ'))
+
+const getCapitalEstado = function (sigla){
+   const listaJSON = {}
+
+   estadosCidades.estados.forEach(function(dados){
+
+      if(sigla == dados.sigla) {
+
+         listaJSON.uf = dados.sigla
+         listaJSON.descricao = dados.nome
+         listaJSON.capital = dados.capital
+      }
+
+   })
+   return listaJSON
+
+}
+
+   // console.log(getCapitalEstado('AC'))
+
+const getEstadosRegiao = function(regiao){
+   const listaJSON = {}
+   const listaArray = []
+   
+   estadosCidades.estados.forEach(function(dados){
+
+      if(regiao == dados.regiao){
+         listaJSON.uf = dados.nome
+         listaJSON.descricao = dados.nome
+
+         
+         listaArray.push(listaJSON)
+      }
+
+   })
+
+   return listaArray
+   
+
+}
+  console.log(getEstadosRegiao('Sul'))
