@@ -22513,9 +22513,8 @@ const getListaDeEstados = function () {
    })
 
    return listaEstadosJSON
-}
 
-//  console.log(getListaDeEstados())
+   //  console.log(getListaDeEstados())
 
 
 /*
@@ -22538,6 +22537,9 @@ const getDadosEstado = function (){
 
 }
 */
+}
+
+
 
 const getDadosEstado = function (sigla) {
    const listaJSON = {}
@@ -22665,4 +22667,13 @@ const getCidades = function(sigla) {
    return listaJSON
 }
 
-console.log(getCidades('AC'))
+module.exports = {
+   getListaDeEstados,
+   getDadosEstado,
+   getCapitalEstado,
+   getEstadosRegiao,
+   getCapitalPais,
+   getCidades
+}
+
+// console.log(getCidades('AC'))
