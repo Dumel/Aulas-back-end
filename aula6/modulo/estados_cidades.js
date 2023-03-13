@@ -22543,6 +22543,7 @@ const getDadosEstado = function (){
 
 const getDadosEstado = function (sigla) {
    const listaJSON = {}
+   
 
    estadosCidades.estados.forEach(function (dados) {
 
