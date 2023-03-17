@@ -56,7 +56,7 @@ app.use((request, response, next) => {
 
 
 //endPoint para listar os estados
-app.get('/estados', cors(), async function (request, response, next) {
+app.get('/v1/senai/estados', cors(), async function (request, response, next) {
 
 
 
@@ -78,7 +78,7 @@ app.get('/estados', cors(), async function (request, response, next) {
 })
 
 //endPoint: Lista as caracteristicas do estado pela sigla
-app.get('/estado/sigla/:uf', cors(), async function (request, response, next) {
+app.get('/v1/senai/estado/sigla/:uf', cors(), async function (request, response, next) {
     //:uf - é uma variável que será utilizado para passagens de valores, na URL da equisição
 
 
@@ -111,7 +111,7 @@ app.get('/estado/sigla/:uf', cors(), async function (request, response, next) {
    
 })
 
-app.get('/estado/capital/sigla/uf:', cors(), async function (request, response, next){
+app.get('/v1/senai/estado/capital/sigla/:uf', cors(), async function (request, response, next){
     let capitalEstado = request.params.uf
     let statusCode
     let dadosCapital = {}
@@ -137,6 +137,119 @@ app.get('/estado/capital/sigla/uf:', cors(), async function (request, response, 
     response.status(statusCode)
     response.json(dadosCapital)
 })
+
+app.get('/v1/senai/estado/regiao/:regiao', cors(), async function (request, response, next){
+    let regiaoAll = request.params.regiao
+    let statusCode
+    let dadosRegiao = {}
+    
+
+    if (regiaoAll == '' || regiaoAll == undefined || !isNaN(regiaoAll)){
+        statusCode = 400
+        dadosRegiao.message = 'Não é possivel processar a requisição pois a sigla do estado não foi informada'
+    }
+    else{
+        let regiao = estadosCidades.getEstadosRegiao(regiaoAll)
+
+        if (regiao){
+            statusCode = 200
+            dadosRegiao = regiao
+        }
+        else{
+            statusCode = 404
+        }
+    }
+
+    response.status(statusCode)
+    response.json(dadosRegiao)
+    
+})
+
+app.get('/v1/senai/estado/capital/pais', cors(), async function (request, response, next){
+    let listaCapitalPais = estadosCidades.getCapitalPais()
+
+    //tratamento pra validar se a função realizou o processamento
+    if (listaCapitalPais) {
+
+        //Retorna o Json e o Status code
+        response.json(listaCapitalPais)
+        response.status(200)
+
+    } else {
+        response.status(500)
+    }
+})
+
+//EndPoint: Lista de cidades filtrada pela sigla do estado
+app.get('/cidades', cors(), async function(request, response, next){
+    let siglaEstado = request.query.uf
+
+    //Recebe o valor de variavel que sera enviada por QueryString
+        //Ex: www.uol.com.br?uf=sp&cep=8695&nome=pedro
+    
+        /*
+            usamos a query para receber diversas variaveis para realizar filtros
+            usamos o params para receber ID (PK), geralmente
+                para fazer put, delete e get
+        */
+   
+
+    
+    let statusCode
+    let dadosCidades = {}
+
+    if (siglaEstado == '' || siglaEstado == undefined || !isNaN(siglaEstado)){
+        statusCode = 400
+        dadosCidades.message = 'Não é possivel processar a requisição pois a sigla do estado não foi informada'
+    }
+    else{
+        let cidade = estadosCidades.getCidades(siglaEstado)
+
+        if (cidade){
+            statusCode = 200
+            dadosCidades = cidade
+        }
+        else{
+            statusCode = 404
+        }
+    }
+
+    response.status(statusCode)
+    response.json(dadosCidades)
+
+
+})
+
+    //EndPoint versão 2: lista de cidades filtrada pela sigla do estado
+    //com mais detalhes 
+app.get('v2/senai/cidades', cors(), async function(request, response, next){
+
+})
+
+// app.get('/estado/cidade/sigla/:uf', cors(), async function(request, response, next){
+//     let cidadesAll = request.params.uf
+//     let statusCode
+//     let dadosCidades = {}
+
+//     if (cidadesAll == '' || cidadesAll == undefined || !isNaN(cidadesAll)){
+//         statusCode = 400
+//         dadosCidades.message = 'Não é possivel processar a requisição pois a sigla do estado não foi informada'
+//     }
+//     else{
+//         let cidade = estadosCidades.getCidades(cidadesAll)
+
+//         if (cidade){
+//             statusCode = 200
+//             dadosCidades = cidade
+//         }
+//         else{
+//             statusCode = 404
+//         }
+//     }
+
+//     response.status(statusCode)
+//     response.json(dadosCidades)
+// })
 
 
 //Permite carregar os endPoints criados e aguardar as requisições

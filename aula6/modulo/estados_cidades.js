@@ -22677,4 +22677,4 @@ module.exports = {
    getCidades
 }
 
-// console.log(getCidades('AC'))
+ //console.log(getCidades('RJ'))
