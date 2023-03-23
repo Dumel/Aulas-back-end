@@ -568,3 +568,27 @@ export const contatos = { "whats-users" :
                             }
                           ]
                         }
+
+const getId1 = function(number){
+  const listaJASON = {}
+
+  contatos["whats-users"].forEach(function(dados){
+
+    if (number == dados.number) {
+      listaJASON.number = dados.number
+      listaJASON.id = dados.id
+      listaJASON.account = dados.account
+      listaJASON.nickname = dados.nickname
+    }
+
+    // dados["created-since"].forEach(function(dadosNumber){
+        
+      // })
+    
+  })
+  return listaJASON
+}
+
+module.exports = {
+  getId1
+}
