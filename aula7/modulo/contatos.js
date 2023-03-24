@@ -1,4 +1,4 @@
-export const contatos = { "whats-users" :
+const contatos = { "whats-users" :
                           [
                             {  
                               "id" : 1,    
@@ -569,26 +569,53 @@ export const contatos = { "whats-users" :
                           ]
                         }
 
-const getId1 = function(number){
+const getNumero = function(number){
   const listaJASON = {}
+
 
   contatos["whats-users"].forEach(function(dados){
 
     if (number == dados.number) {
-      listaJASON.number = dados.number
-      listaJASON.id = dados.id
-      listaJASON.account = dados.account
-      listaJASON.nickname = dados.nickname
-    }
+      listaJASON.numero = dados.number
+      listaJASON.nome = dados['account']
+      listaJASON.apelido = dados.nickname
+      listaJASON.criacao = dados["created-since"]
 
-    // dados["created-since"].forEach(function(dadosNumber){
-        
-      // })
     
+    }else
+      return false
+
+    
+    
+  })
+  return listaJASON
+  
+}
+
+//console.log(getId1(11987876567));
+
+const getIdContacts = function(id){
+  const listaJASON = {}
+  const listaArray = []
+
+  contatos["whats-users"].forEach(function(dados){
+    if(id == dados.id) {
+      dados.contacts.forEach(function(dadosContatos){
+        listaArray.push({
+          name:dadosContatos.name,
+          description:dadosContatos.description,
+          image:dadosContatos.image,
+          messages:dadosContatos.messages})
+      })
+    }
+    listaJASON.id = listaArray
   })
   return listaJASON
 }
 
+//console.log(getIdContacts(3));
+
 module.exports = {
-  getId1
+  getNumero,
+  getIdContacts
 }
