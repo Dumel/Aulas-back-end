@@ -595,22 +595,25 @@ const getNumero = function(number){
 //console.log(getId1(11987876567));
 
 const getIdContacts = function(id){
-  const listaJASON = {}
-  const listaArray = []
+  // const listaJASON = {}
+  // const listaArray = []
 
-  contatos["whats-users"].forEach(function(dados){
-    if(id == dados.id) {
-      dados.contacts.forEach(function(dadosContatos){
-        listaArray.push({
-          name:dadosContatos.name,
-          description:dadosContatos.description,
-          image:dadosContatos.image,
-          messages:dadosContatos.messages})
-      })
-    }
-    listaJASON.id = listaArray
-  })
-  return listaJASON
+  let contato = contatos["whats-users"][id-1]
+  return contato.contacts
+
+  // contatos["whats-users"].forEach(function(dados){
+  //   if(id == dados.id) {
+  //     dados.contacts.forEach(function(dadosContatos){
+  //       listaArray.push({
+  //         name:dadosContatos.name,
+  //         description:dadosContatos.description,
+  //         image:dadosContatos.image,
+  //         messages:dadosContatos.messages})
+  //     })
+  //   }
+  //   listaJASON.id = listaArray
+  // })
+  // return listaJASON
 }
 
 //console.log(getIdContacts(3));
