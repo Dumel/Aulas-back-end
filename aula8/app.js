@@ -39,12 +39,15 @@ app.use((request, response, next) => {
 
 //CRUD (Create, Read, Update, e Delete)
 
+//Criando uma const para realizar o processo de padronização de dados que vão chegar no body da requisição
+const bodyJSON = bodyParser.json()
 
+let controllerAluno = require('./controller/controller_aluno.js')
 
 //EndPoints retorna todos os dados de alunos 
 app.get('/v1/lion-school/aluno', cors(), async function(request, response){
 
-    let controllerAluno = require('./controller/controller_aluno.js')
+    
 
     //Solicita a controller que retorne todos os alunos do BD
     let dados = await controllerAluno.selecionarTodosAluno()
@@ -61,10 +64,23 @@ app.get('/v1/lion-school/aluno', cors(), async function(request, response){
 
 //EndPoints retorna dados do aluno pelo id
 app.get('/v1/lion-school/aluno/:id', cors(), async function(request, response){
+
 })
 
 //EndPoints inserir um novo aluno
-app.post('/v1/lion-school/aluno', cors(), async function(request, response){
+app.post('/v1/lion-school/aluno', cors(), bodyJSON, async function(request, response){
+    //Recebe os dados encaminhados no body da requisição
+    let dadosBody = request.body
+
+   
+
+    let resultInsertDados = await controllerAluno.inserirAluno(dadosBody)
+
+    console.log(resultInsertDados);
+
+    //Retorna o status code e a message
+    response.status(resultInsertDados.status)
+    response.json(resultInsertDados)
 })
 
 //EndPoints que atualiza um aluno pelo ID
