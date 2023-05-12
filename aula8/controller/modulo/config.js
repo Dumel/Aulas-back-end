@@ -12,6 +12,7 @@
  const ERROR_REQUIRED_ID = {status: 400, message: 'O atributo ID é obrigatório na requisição'}
  const ERROR_INTERNAL_SERVER = {status: 500, message: 'Erro interno no servidor do bda.'}
  const ERROR_CONTENT_TYPE = {status: 415, message: 'O tipo de midia content type da solicitação não é compativel com o servidor'}
+ const ERROR_NOT_FOUND = {status: 404, message: 'Nenhum registro encontrado na requisição'}
 
 /********************************************CONSTANTES DE ERROS *********************************************** */
  const CREATED_ITEM = {status:  201, message: 'Registro criado com sucesso.'}
@@ -25,5 +26,6 @@ module.exports = {
     CREATED_ITEM,
     UPDATE_ITEM,
     DELETE_ITEM,
-    ERROR_CONTENT_TYPE
+    ERROR_CONTENT_TYPE,
+    ERROR_NOT_FOUND
 }

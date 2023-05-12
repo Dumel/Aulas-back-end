@@ -104,13 +104,39 @@ const selectAllAluno = async function (dadosAluno) {
 }
 
 //retorna um Registro do banco de dados
-const selectByIdAluno = function (dadosAluno) {
+const selectByIdAluno = async function (id) {
+    //Variável com scriptSQL para executar no BD
+    let sql = `select * from tbl_aluno where id = ${id}`
 
+    //Executa bo banxo de dados o scriptSQL
+    //$queryRawUnsafe() é utilizado quando o scriptSQL estar em uma variável
+    //$queryRaw() é utilizado quansonpassar o scipt direto no metodo(Ex>$queryRaw('select * from tbl_aluno'))
+    let rsAluno = await prisma.$queryRawUnsafe(sql)
+
+    if (rsAluno.length > 0)
+        return rsAluno
+    else
+        return false
+}
+
+const selectLastId = async function(){
+
+    //Script 
+    let sql = `select id from tbl_aluno order by id desc limit 1`
+
+    let rsAluno = await prisma.$queryRawUnsafe(sql)
+
+    if(rsAluno.length > 0)
+        return rsAluno[0].id
+    else
+        return false
 }
 
 module.exports = {
     selectAllAluno,
     insertAluno,
     UpdateAluno,
-    deleteAluno
+    deleteAluno,
+    selectByIdAluno,
+    selectLastId
 }

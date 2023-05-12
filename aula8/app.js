@@ -55,18 +55,21 @@ app.get('/v1/lion-school/aluno', cors(), async function(request, response){
     let dados = await controllerAluno.selecionarTodosAluno()
 
     //Valida se existem registros para retornar na requisição
-    if(dados){
-        response.json(dados)
-        response.status(200)
-    }else{
-        response.json()
-        response.status(404)
-    }
+    response.status(dados.status)
+    response.json(dados)
 })
 
 //EndPoints retorna dados do aluno pelo id
 app.get('/v1/lion-school/aluno/:id', cors(), async function(request, response){
 
+    let idAluno = request.params.id;
+
+     //Solicita a controller que retorne todos os alunos do BD
+     let dados = await controllerAluno.buscarIdAluno(idAluno)
+
+     //Valida se existem registros para retornar na requisição
+     response.status(dados.status)
+     response.json(dados)
 })
 
 //EndPoints inserir um novo aluno
@@ -74,7 +77,7 @@ app.post('/v1/lion-school/aluno', cors(), bodyJSON, async function(request, resp
     
     let contentType = request.headers['content-type']
     
-    if (String (contentType).toLowerCase == 'application/json') {
+    if (String (contentType).toLowerCase() == 'application/json') {
     
 
     //Recebe os dados encaminhados no body da requisição
